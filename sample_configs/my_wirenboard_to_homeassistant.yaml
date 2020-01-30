@@ -1,0 +1,50 @@
+
+broker_to_client:
+  - topic: ^/devices/wb-gpio/controls/LIGHT_([^/]*)/meta/type$
+    template: /homeassistant/light/{{.f1}}/config
+    val_map:
+      switch: >-
+        {
+        "command_topic":"/light/{{.f1}}/state",
+        "state_topic":"/light/{{.f1}}/state",
+        "name":"{{.f1}}"
+        }
+
+  - topic: ^/devices/wb-gpio/controls/LIGHT_([^/]*)$
+    template: /light/{{.f1}}/state
+    val_map: {0: OFF, 1: ON}
+
+  - topic: ^/devices/xiaomi/controls/t_([^/]*)_temperature/meta/type$
+    template: /homeassistant/climate/{{.f1}}/config
+    val_map:
+      switch: >-
+        {
+        "temperature_command_topic":"/climate/{{.f1}}/target_temp",
+        "temperature_state_topic":"/climate/{{.f1}}/target_temp",
+        "current_temperature_topic":"/climate/{{.f1}}/temp",
+        "mode_state_topic":"/climate/{{.f1}}/mode_state_topic",
+        "mode_command_topic":"/none",
+        "name":"{{.f1}}",
+        "modes":["heat","off"],
+        "max_temp":30,
+        "min_temp":10,
+        "retain":"true"
+        }
+
+  - topic: ^/devices/xiaomi/controls/t_([^/]*)_temperature$
+    template: /climate/{{.f1}}/temp
+
+  - topic: ^/devices/climate_controls/controls/([^/]*)$
+    template: /climate/{{.f1}}/target_temp
+
+  - topic: ^/devices/climate_heater_state/controls/([^/]*)$
+    template: /climate/{{.f1}}/mode_state_topic
+    val_map: {0: off, 1: heat}
+
+client_to_broker:
+  - topic: ^/light/([^/]*)/state$
+    template: /devices/wb-gpio/controls/LIGHT_{{.f1}}/on
+    val_map: {OFF: 0, ON: 1}
+
+  - topic: ^/climate/([^/]*)/target_temp$
+    template: /devices/climate_controls/controls/{{.f1}}/on

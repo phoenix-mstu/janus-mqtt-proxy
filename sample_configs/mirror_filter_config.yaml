@@ -1,0 +1,8 @@
+
+broker_to_client:
+  - topic: ^(.*)$
+    template: '{{.f1}}'
+
+client_to_broker:
+  - topic: ^(.*)$
+    template: '{{.f1}}'

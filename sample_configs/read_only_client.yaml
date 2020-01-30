@@ -1,0 +1,9 @@
+
+broker_to_client:
+  - topic: ^(.*)$
+    template: '{{.f1}}'
+
+# just comment it out and client becomes readonly
+#client_to_broker:
+#  - topic: ^(.*)$
+#    template: '{{.f1}}'

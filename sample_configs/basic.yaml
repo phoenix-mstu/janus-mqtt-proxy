@@ -1,0 +1,17 @@
+
+broker_host: tcp://wb.home:1883
+broker_login:
+broker_password:
+
+clients:
+
+  - login: some_login
+    password: some_pass
+    filters_config: sample_configs/mirror_filter_config.yaml
+
+  # read only with no password
+  - filters_config: sample_configs/read_only_client.yaml
+
+  - login: homeassistant
+    password: pass
+    filters_config: sample_configs/my_wirenboard_to_homeassistant.yaml
