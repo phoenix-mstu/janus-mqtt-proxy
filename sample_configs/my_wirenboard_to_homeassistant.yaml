@@ -1,5 +1,42 @@
 
 broker_to_client:
+
+  #########################################################################
+  # floor
+
+  - topic: ^/devices/floor_controls/controls/([^/]*)/meta/type$
+    template: /homeassistant/switch/{{.f1}}/config
+    val_map:
+      switch: >-
+        {
+        "command_topic":"/floor/{{.f1}}/state",
+        "state_topic":"/floor/{{.f1}}/state",
+        "name":"floor {{.f1}}",
+        "retain":"true"
+        }
+
+  - topic: ^/devices/floor_controls/controls/([^/]*)$
+    template: /floor/{{.f1}}/state
+    val_map: {0: OFF, 1: ON}
+
+  # floor temp
+
+  - topic: ^/devices/wb-w1/controls/28-8000001f1806/meta/type$
+    template: /homeassistant/sensor/floor_temperature/config
+    val_map:
+      temperature: >-
+        {
+        "state_topic":"/floor/{{.f1}}/state",
+        "name":"floor {{.f1}}",
+        "retain":"true"
+        }
+
+  - topic: ^/devices/wb-w1/controls/28-8000001f1806$
+    template: /floor/temperature
+
+  #########################################################################
+  # light
+
   - topic: ^/devices/wb-gpio/controls/LIGHT_([^/]*)/meta/type$
     template: /homeassistant/light/{{.f1}}/config
     val_map:
@@ -14,10 +51,13 @@ broker_to_client:
     template: /light/{{.f1}}/state
     val_map: {0: OFF, 1: ON}
 
+  #########################################################################
+  # heaters
+
   - topic: ^/devices/xiaomi/controls/t_([^/]*)_temperature/meta/type$
     template: /homeassistant/climate/{{.f1}}/config
     val_map:
-      switch: >-
+      value: >-
         {
         "temperature_command_topic":"/climate/{{.f1}}/target_temp",
         "temperature_state_topic":"/climate/{{.f1}}/target_temp",
@@ -42,6 +82,11 @@ broker_to_client:
     val_map: {0: off, 1: heat}
 
 client_to_broker:
+
+  - topic: ^/floor/([^/]*)/state$
+    template: /devices/floor_controls/controls/{{.f1}}/on
+    val_map: {OFF: 0, ON: 1}
+
   - topic: ^/light/([^/]*)/state$
     template: /devices/wb-gpio/controls/LIGHT_{{.f1}}/on
     val_map: {OFF: 0, ON: 1}

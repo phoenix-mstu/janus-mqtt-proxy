@@ -19,12 +19,17 @@ func serveClient(conn net.Conn, configs []config.CompiledFiltersConfig, brokerCo
 func main() {
 	log.Print("Proxy started")
 
-	if len(os.Args) != 2 {
+	configPath := os.Getenv("MQTT_PROXY_CONFIG_PATH")
+	if len(os.Args) > 1 {
+		configPath = os.Args[1]
+	}
+
+	if configPath == "" {
 		println("Usage: go-modifying-mqtt-proxy /path/to/c.yaml")
 		os.Exit(0)
 	}
 
-	c := config.ReadConfigFile(os.Args[1])
+	c := config.ReadConfigFile(configPath)
 
 	listener, err := net.Listen("tcp", "0.0.0.0:1883")
 	if err != nil {
