@@ -70,8 +70,11 @@ func (cms *ClientMessageSender) preparePublishSession() (uint16, chan byte) {
 	cms.Lock()
 	defer cms.Unlock()
 	for {
+		// searching for fee messageId
 		cms.lastSentMessageId++
-		if _, ok := cms.sendingMessageIds[cms.lastSentMessageId]; !ok {
+		_, found := cms.sendingMessageIds[cms.lastSentMessageId]
+		// must be non zero my spec
+		if !found && cms.lastSentMessageId != 0 {
 			break
 		}
 	}
