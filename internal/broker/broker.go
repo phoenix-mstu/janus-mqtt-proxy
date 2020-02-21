@@ -23,7 +23,6 @@ func StartBrokerConnection(host, login, password string) *BrokerConnection {
 		AddBroker(host).
 		SetUsername(login).
 		SetPassword(password).
-		SetClientID("proxy").
 		SetDefaultPublishHandler(srvCon.messageHandler).
 		SetOrderMatters(true))
 
