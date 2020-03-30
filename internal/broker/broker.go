@@ -24,15 +24,16 @@ func StartBrokerConnection(host, login, password string) *BrokerConnection {
 		SetUsername(login).
 		SetPassword(password).
 		SetDefaultPublishHandler(srvCon.messageHandler).
+		SetOnConnectHandler(func(client mqtt.Client) {
+			if token := srvCon.broker.Subscribe("#", 0, nil); token.Wait() && token.Error() != nil {
+				fmt.Println(token.Error())
+				os.Exit(1)
+			}
+		}).
 		SetOrderMatters(true))
 
 	if token := srvCon.broker.Connect(); token.Wait() && token.Error() != nil {
 		panic(token.Error())
-	}
-
-	if token := srvCon.broker.Subscribe("#", 0, nil); token.Wait() && token.Error() != nil {
-		fmt.Println(token.Error())
-		os.Exit(1)
 	}
 
 	return &srvCon
