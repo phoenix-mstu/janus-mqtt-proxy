@@ -1,0 +1,10 @@
+
+broker_host: tcp://wb.home:1883
+broker_login:
+broker_password:
+
+clients:
+
+  - login: habr
+    password: habr
+    filters_config: sample_configs/habr_filters.yaml

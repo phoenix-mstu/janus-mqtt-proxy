@@ -1,0 +1,30 @@
+
+
+broker_to_client:
+
+  - topic: ^/devices/wb-gpio/controls/LIGHT_STORE$
+    template: /light
+
+  - topic: ^/devices/wb-gpio/controls/LIGHT_STORE/meta/type$
+    template: /chat_info
+    val_map:
+      switch: "Welcome to chat! We have 10 rooms: /mqtt_chat/room_0, /mqtt_chat/room_1 ... Symbols allowed: a-zA-Z0-9 and space. 200 symbols max."
+
+  - topic: ^/devices/wb-gpio/controls/LIGHT_HALL1/meta/type$
+    template: /light_info
+    val_map:
+      switch: "You may control light in my store (don't know why..). Just send 0 or 1 to /light"
+
+  - topic: ^/mqtt_chat/room_([0-9])$
+    template: /chat_{{.f1}}
+
+client_to_broker:
+
+  - topic: ^/light$
+    template: /devices/wb-gpio/controls/LIGHT_STORE/on
+    val_map: {0: 0, 1: 1}
+
+  - topic: ^/chat_([0-9])$
+    template: /mqtt_chat/room_{{.f1}}
+    val_regex: ^([a-zA-Z0-9\s]{1,200})$
+    val_template: "{{.f1}}"

@@ -96,10 +96,20 @@ func ReadFiltersFromConfig(filtersConfig []YamlFilterConfig) ([]subscriptions.Fi
 		for key, value := range filterConfig.ValMap {
 			valuesMap[key] = *makeTemplate(value)
 		}
+
+		var valFilter *regexp.Regexp
+		var valAssembler *template.Template
+		if filterConfig.ValRegex != "" &&  filterConfig.ValTemplate != "" {
+			valFilter = regexp.MustCompile(filterConfig.ValRegex)
+			valAssembler = makeTemplate(filterConfig.ValTemplate)
+		}
+
 		filters = append(filters, subscriptions.MakeFilter(
 			*regexp.MustCompile(filterConfig.Topic),
 			*makeTemplate(filterConfig.Template),
-			valuesMap))
+			valuesMap,
+			valFilter,
+			valAssembler))
 	}
 	return filters, nil
 }

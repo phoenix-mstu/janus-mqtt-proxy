@@ -4,6 +4,8 @@ type YamlFilterConfig struct {
 	Topic string
 	Template string
 	ValMap map[string]string `yaml:"val_map"`
+	ValRegex string `yaml:"val_regex"`
+	ValTemplate string `yaml:"val_template"`
 }
 
 type YamlFiltersConfig struct {
