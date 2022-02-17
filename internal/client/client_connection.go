@@ -3,10 +3,10 @@ package client
 import (
 	"fmt"
 	"github.com/eclipse/paho.mqtt.golang/packets"
-	"github.com/phoenix-mstu/go-modifying-mqtt-proxy/internal/broker"
-	"github.com/phoenix-mstu/go-modifying-mqtt-proxy/internal/client_message_sender"
-	"github.com/phoenix-mstu/go-modifying-mqtt-proxy/internal/config"
-	"github.com/phoenix-mstu/go-modifying-mqtt-proxy/internal/subscriptions"
+	"github.com/phoenix-mstu/janus-mqtt-proxy/internal/broker"
+	"github.com/phoenix-mstu/janus-mqtt-proxy/internal/client_message_sender"
+	"github.com/phoenix-mstu/janus-mqtt-proxy/internal/config"
+	"github.com/phoenix-mstu/janus-mqtt-proxy/internal/subscriptions"
 	"log"
 	"net"
 )

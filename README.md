@@ -53,7 +53,7 @@ Then you can run proxy: `./proxy basic.yaml`
 # More info
 
 - The most advanced sample config is located in 
-[sample_configs/my_wirenboard_to_homeassistant.yaml](https://github.com/phoenix-mstu/go-modifying-mqtt-proxy/blob/master/sample_configs/my_wirenboard_to_homeassistant.yaml).
+[sample_configs/my_wirenboard_to_homeassistant.yaml](https://github.com/phoenix-mstu/janus-mqtt-proxy/blob/master/sample_configs/my_wirenboard_to_homeassistant.yaml).
 Look there for more examples.
 
 - Article in English: https://medium.com/@phoenix.mstu/modifying-mqtt-proxy-bf6d8931ef60
