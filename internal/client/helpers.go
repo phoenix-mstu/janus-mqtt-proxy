@@ -1,7 +1,7 @@
 package client
 
 import (
-	"github.com/phoenix-mstu/go-modifying-mqtt-proxy/internal/subscriptions"
+	"github.com/phoenix-mstu/janus-mqtt-proxy/internal/subscriptions"
 )
 
 func filterForClient(filters []subscriptions.Filter, subs []subscription, topic string, payload []byte) (string, []byte, byte, bool) {

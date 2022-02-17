@@ -3,13 +3,13 @@
 
 FROM golang AS build-env
 
-WORKDIR /go/src/github.com/phoenix-mstu/go-modifying-mqtt-proxy
+WORKDIR /go/src/github.com/phoenix-mstu/janus-mqtt-proxy
 ADD cmd cmd
 ADD internal internal
 
 RUN go get -d ./...
 RUN CGO_ENABLED=0 \
-    go install github.com/phoenix-mstu/go-modifying-mqtt-proxy/cmd/proxy
+    go install github.com/phoenix-mstu/janus-mqtt-proxy/cmd/proxy
 
 ################################################
 # making main image

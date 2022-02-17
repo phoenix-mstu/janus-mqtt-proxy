@@ -1,9 +1,9 @@
 package main
 
 import (
-	"github.com/phoenix-mstu/go-modifying-mqtt-proxy/internal/broker"
-	"github.com/phoenix-mstu/go-modifying-mqtt-proxy/internal/client"
-	"github.com/phoenix-mstu/go-modifying-mqtt-proxy/internal/config"
+	"github.com/phoenix-mstu/janus-mqtt-proxy/internal/broker"
+	"github.com/phoenix-mstu/janus-mqtt-proxy/internal/client"
+	"github.com/phoenix-mstu/janus-mqtt-proxy/internal/config"
 	"log"
 	"net"
 	"os"
@@ -25,7 +25,7 @@ func main() {
 	}
 
 	if configPath == "" {
-		println("Usage: go-modifying-mqtt-proxy /path/to/c.yaml")
+		println("Usage: janus-mqtt-proxy /path/to/c.yaml")
 		os.Exit(0)
 	}
 

@@ -2,7 +2,7 @@ package config
 
 import (
 	"errors"
-	"github.com/phoenix-mstu/go-modifying-mqtt-proxy/internal/subscriptions"
+	"github.com/phoenix-mstu/janus-mqtt-proxy/internal/subscriptions"
 	"gopkg.in/yaml.v3"
 	"io/ioutil"
 	"log"
