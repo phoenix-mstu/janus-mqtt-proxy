@@ -1,0 +1,8 @@
+
+broker_host: tcp://mqtt-server:1883
+broker_login:
+broker_password:
+
+clients:
+
+  - filters_config: /configs/client1.yaml

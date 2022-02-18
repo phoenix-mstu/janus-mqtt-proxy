@@ -1,0 +1,13 @@
+
+broker_to_client:
+  - topic: ^(/verbose.*)$
+    template: '{{.f1}}'
+
+  - topic: ^/val_map_test$
+    template: /val_map_msg
+    val_map:
+      get_msg: "val_map works!"
+
+client_to_broker:
+  - topic: ^(.*)$
+    template: '{{.f1}}'

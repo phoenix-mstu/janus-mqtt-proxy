@@ -50,6 +50,24 @@ clients:
 
 Then you can run proxy: `./proxy basic.yaml`
 
+# Usage
+
+The service is meant to be used inside a Docker container. Though it should work as an executable as well, if you manage to build it.
+
+To run it as a Docker container you should:
+1. Clone the repository
+2. Create ```configs``` directory with your main.yaml and filters.yaml configs.
+3. run ```docker build -t janus .```
+4. run ```docker run -v $(pwd)/configs:/configs/ janus /configs/main.yaml```
+
+# Testing
+
+There are a few integration tests which check basic functionality. You can also use them as a reference.
+
+1. Clone the repository
+2. ```cd smoke_tests```
+3. ```/run_tests.sh```
+
 # More info
 
 - The most advanced sample config is located in 

@@ -1,5 +1,5 @@
 
-broker_host: tcp://wb.home:1883
+broker_host: tcp://mqtt-server:1883
 broker_login:
 broker_password:
 

@@ -1,0 +1,16 @@
+version: "3"
+
+services:
+
+  janus:
+    build: ..
+    ports:
+      - "1883:1883"
+    command: "/configs/main.yaml"
+    depends_on:
+      - mqtt-server
+    volumes:
+      - ./configs:/configs
+
+  mqtt-server:
+    image: toke/mosquitto

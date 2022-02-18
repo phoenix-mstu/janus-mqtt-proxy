@@ -7,6 +7,7 @@ WORKDIR /go/src/github.com/phoenix-mstu/janus-mqtt-proxy
 ADD cmd cmd
 ADD internal internal
 
+RUN go mod init
 RUN go get -d ./...
 RUN CGO_ENABLED=0 \
     go install github.com/phoenix-mstu/janus-mqtt-proxy/cmd/proxy
