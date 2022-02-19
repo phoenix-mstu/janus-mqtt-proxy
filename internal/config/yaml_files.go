@@ -15,9 +15,11 @@ type YamlFiltersConfig struct {
 
 type YamlMainConfig struct {
 	BrokerHost string `yaml:"broker_host"`
+	BrokerClientID string `yaml:"broker_client_id"`
 	BrokerLogin string `yaml:"broker_login"`
 	BrokerPassword string `yaml:"broker_password"`
 	Clients []struct{
+		ClientID string `yaml:"client_id"`
 		Login string
 		Password string
 		FiltersConfig string `yaml:"filters_config"`

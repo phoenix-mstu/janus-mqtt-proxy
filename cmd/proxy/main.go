@@ -37,7 +37,7 @@ func main() {
 		os.Exit(-1)
 	}
 
-	brokerConnection := broker.StartBrokerConnection(c.BrokerHost, c.BrokerLogin, c.BrokerPassword)
+	brokerConnection := broker.StartBrokerConnection(c.BrokerHost, c.BrokerClientID, c.BrokerLogin, c.BrokerPassword)
 
 	for {
 		clientConn, err := listener.Accept()

@@ -17,7 +17,7 @@ type subscription struct {
 }
 
 type client struct {
-	cms			  *client_message_sender.ClientMessageSender
+	cms           *client_message_sender.ClientMessageSender
 	conn          net.Conn
 	configs       []config.CompiledFiltersConfig
 	brokerFilters []subscriptions.Filter
@@ -25,8 +25,8 @@ type client struct {
 
 	subscriptions []subscription
 	brokerClient  *broker.Client
-	isConnected bool
-	username string
+	isConnected   bool
+	username      string
 }
 
 func ServeClientConnection(conn net.Conn, configs []config.CompiledFiltersConfig, brokerClient *broker.Client) {
@@ -74,9 +74,9 @@ func (c *client) sendToBroker(MessageID uint16, topic string, qos byte, retained
 	}
 }
 
-func (c *client) login(username, password string) bool {
+func (c *client) login(client_id, username, password string) bool {
 	for _, conf := range c.configs {
-		if conf.Login == username && conf.Password == password {
+		if conf.ClientID == client_id && conf.Login == username && conf.Password == password {
 			c.isConnected = true
 			c.username = username
 			c.brokerFilters = conf.BrokerFilters
@@ -132,7 +132,7 @@ func (c *client) serveIncoming() {
 		case *packets.ConnectPacket:
 			c.printf("ConnectPacket, username: %v", packet.Username)
 			response := packets.NewControlPacket(packets.Connack).(*packets.ConnackPacket)
-			if c.login(packet.Username, string(packet.Password)) {
+			if c.login(packet.ClientIdentifier, packet.Username, string(packet.Password)) {
 				c.printf("Connected")
 				c.cms.SendPacket(response)
 			} else {

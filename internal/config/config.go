@@ -11,6 +11,7 @@ import (
 )
 
 type CompiledFiltersConfig struct {
+	ClientID string
 	Login string
 	Password string
 	BrokerFilters []subscriptions.Filter
@@ -18,6 +19,7 @@ type CompiledFiltersConfig struct {
 }
 
 type CompiledConfig struct {
+	BrokerClientID string
 	BrokerHost string
 	BrokerLogin string
 	BrokerPassword string
@@ -32,6 +34,7 @@ func ReadConfigFile(filename string) *CompiledConfig {
 	}
 
 	res := CompiledConfig{
+		BrokerClientID: yamlMainConfig.BrokerClientID,
 		BrokerHost:     yamlMainConfig.BrokerHost,
 		BrokerLogin:    yamlMainConfig.BrokerLogin,
 		BrokerPassword: yamlMainConfig.BrokerPassword,
@@ -59,6 +62,7 @@ func ReadConfigFile(filename string) *CompiledConfig {
 		}
 
 		res.Clients = append(res.Clients, CompiledFiltersConfig{
+			ClientID:      cConfig.ClientID,
 			Login:         cConfig.Login,
 			Password:      cConfig.Password,
 			BrokerFilters: bf,

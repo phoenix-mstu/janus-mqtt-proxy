@@ -14,13 +14,14 @@ type BrokerConnection struct {
 	retainedKeeper *RetainedKeeper
 }
 
-func StartBrokerConnection(host, login, password string) *BrokerConnection {
+func StartBrokerConnection(host, client_id, login, password string) *BrokerConnection {
 	srvCon := BrokerConnection{
 		RWMutex: sync.RWMutex{},
 		retainedKeeper: newRetainedKeeper(),
 	}
 	srvCon.broker = mqtt.NewClient(mqtt.NewClientOptions().
 		AddBroker(host).
+		SetClientID(client_id).
 		SetUsername(login).
 		SetPassword(password).
 		SetDefaultPublishHandler(srvCon.messageHandler).
